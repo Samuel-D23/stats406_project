@@ -2,10 +2,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
+# 画出的图片所在的路径
+output_folder = '/Users/samuelchen/Desktop/UMICH/STATS 406/stats406_project/plots'
 
 # 读取CSV文件
-df1 = pd.read_csv('/Users/samuelchen/Desktop/dataset/2019.csv')
-df2 = pd.read_csv('/Users/samuelchen/Desktop/dataset/2020.csv')
+df1 = pd.read_csv('/Users/samuelchen/Desktop/UMICH/STATS 406/stats406_project/city daily/combined_china_cities_2019.csv')
+df2 = pd.read_csv('/Users/samuelchen/Desktop/UMICH/STATS 406/stats406_project/city daily/combined_china_cities_2020.csv')
 
 # 合并两个数据集
 df = pd.concat([df1, df2])
@@ -25,17 +27,13 @@ for city, data in cities:
     data = data.sort_values('common_date')
     
     # 筛选数据
-    data_2018_2019 = data[(data['date'] >= '2018-12-01') & (data['date'] <= '2019-06-30')]
-    data_2019_2020 = data[(data['date'] >= '2019-12-01') & (data['date'] <= '2020-06-30')]
-    
+    data_2018_2019 = data[(data['date'] >= pd.to_datetime('2018-12-01')) & (data['date'] <= pd.to_datetime('2019-06-30'))]
+    data_2019_2020 = data[(data['date'] >= pd.to_datetime('2019-12-01')) & (data['date'] <= pd.to_datetime('2020-06-30'))]
+
     # 绘制图形
     plt.figure(figsize=(10,5))
-    plt.plot(data_2018_2019['common_date'], data_2018_2019['AQI_avg'], linestyle='--', label='2018-12 to 2019-06')
-    plt.plot(data_2019_2020['common_date'], data_2019_2020['AQI_avg'], linestyle='-', label='2019-12 to 2020-06')
-    
-    plt.title(f'AQI Time Series for {city}')
-    plt.xlabel('Date')
-    plt.ylabel('AQI Value')
+    plt.plot(data_2018_2019['date'], data_2018_2019['AQI_avg'], linestyle='--', label='2018-12 to 2019-06')
+    plt.plot(data_2019_2020['date'], data_2019_2020['AQI_avg'], linestyle='-', label='2019-12 to 2020-06')
     
     # 设置横轴格式，仅显示月和日
     plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%m-%d'))
@@ -50,5 +48,5 @@ for city, data in cities:
     plt.tight_layout()
     
     # 保存图形
-    plt.savefig(f'AQI_{city}.png')
+    plt.savefig(f'{output_folder}/AQI_{city}.png')
     plt.close()  # 关闭图形
