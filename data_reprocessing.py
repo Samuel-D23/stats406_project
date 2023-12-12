@@ -27,7 +27,7 @@ for filename in os.listdir(data_folder_path):
         daily_max_8h_o3 = grouped_data['O3_8h'].max()
         daily_avg_aqi = grouped_data['AQI'].mean()
 
-        # 组合结果
+        # 组合结果, 滑动平均值
         daily_air_quality = daily_avg_concentrations
         daily_air_quality['O3_8h_max'] = daily_max_8h_o3
         daily_air_quality['AQI_avg'] = daily_avg_aqi
