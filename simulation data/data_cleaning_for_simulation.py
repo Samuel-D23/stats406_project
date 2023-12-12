@@ -10,9 +10,9 @@ cities = data['city'].unique()
 
 # Define date ranges for each sheet
 date_ranges = {
-    '2019_A': (20181201, 20190131),
-    '2019_B': (20190201, 20190430),
-    '2019_C': (20190501, 20190630)
+    '2020_A': (20191201, 20200131),
+    '2020_B': (20200201, 20200430),
+    '2020_C': (20200501, 20200630)
 }
 
 # Function to filter data based on date range
