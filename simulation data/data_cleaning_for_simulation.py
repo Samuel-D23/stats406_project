@@ -20,7 +20,7 @@ def filter_data_by_date_range(df, start_date, end_date):
     return df[(df['date'] >= start_date) & (df['date'] <= end_date)]
 
 # Output folder for the Excel files
-output_folder = '/Users/samuelchen/Desktop/UMICH/STATS 406/stats406_project/simulation data/true'
+output_folder = '/Users/samuelchen/Desktop/UMICH/STATS 406/stats406_project/cleaned data 2020'
 os.makedirs(output_folder, exist_ok=True)
 
 # Process data for each city and save to separate Excel files
